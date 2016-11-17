@@ -153,23 +153,7 @@
 \colorlet{awesome}{awesome-red}
 
 % Awesome section color
-\newcounter{colorCounter}
-\def\@sectioncolor#1#2#3{%
-  {%
-    \color{%
-      \ifcase\value{colorCounter}%
-        awesome\or%
-        awesome\or%
-        awesome\or%
-        awesome\or%
-        awesome\else%
-        awesome\fi%
-    } #1#2#3%
-  }%
-  \stepcounter{colorCounter}%
-}
-
-
+\def\@sectioncolor{\color{awesome}}
 %-------------------------------------------------------------------------------
 %                Configuration for fonts
 %-------------------------------------------------------------------------------
