@@ -498,6 +498,16 @@
   \par\nobreak\addvspace{1ex}
 }
 
+% Define a section for Volunteer experience specifically
+% Usage: \cvsect{<section-title>}
+\newcommand{\cvsect}[1]{
+  \par\addvspace{3.5ex}
+  \phantomsection{}
+  \sectionstyle{#1}
+  \color{gray}\vhrulefill{0.9pt}
+  \par\nobreak\addvspace{1ex}
+}
+
 % Define a subsection for CV
 % Usage: \cvsubsection{<subsection-title>}
 \newcommand{\cvsubsection}[1]{
