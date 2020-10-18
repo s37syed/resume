@@ -240,7 +240,7 @@
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
-\newcommand*{\paragraphstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 \newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
 \newcommand*{\recipienttitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
@@ -249,6 +249,24 @@
 \newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{lighttext} #1}}
 
+
+%-------------------------------------------------------------------------------
+%                Commands for extra
+%-------------------------------------------------------------------------------
+%% Define helper macros a user can change easily
+% Header
+\newcommand{\acvHeaderNameDelim}{\space}
+\newcommand{\acvHeaderAfterNameSkip}{.4mm}
+\newcommand{\acvHeaderAfterPositionSkip}{.4mm}
+\newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
+\newcommand{\acvHeaderIconSep}{\space}
+\newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\newcommand{\acvHeaderAfterSocialSkip}{6mm}
+\newcommand{\acvHeaderAfterQuoteSkip}{5mm}
+
+% Others
+\newcommand{\acvSectionTopSkip}{3mm}
+\newcommand{\acvSectionContentTopSkip}{2.5mm}
 
 %-------------------------------------------------------------------------------
 %                Commands for personal information
@@ -515,6 +533,16 @@
   \subsectionstyle{#1}
 }
 
+% Define a paragraph for CV
+\newenvironment{cvparagraph}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-3mm}
+  \paragraphstyle
+}{%
+  \par
+  \vspace{2mm}
+}
+
 % Define an environment for cventry
 \newenvironment{cventries}{
   \begin{center}
@@ -604,56 +632,4 @@
   \end{itemize}
   \end{justify}
   \vspace{-2mm}
-}
-
-
-%-------------------------------------------------------------------------------
-%                Commands for elements of Cover Letter
-%-------------------------------------------------------------------------------
-% Define an environment for cvletter
-\newenvironment{cvletter}{
-  \lettertextstyle
-}{
-}
-
-% Define a paragraph for cvletter
-% Usage: \cvparagraph{<paragraph-title>}
-\newcommand{\cvparagraph}[1]{
-  \par\addvspace{2.5ex}
-  \phantomsection{}
-  \paragraphstyle{#1}
-  \color{gray}\vhrulefill{0.9pt}
-  \par\nobreak\addvspace{0.4ex}
-}
-
-% Define a title of the cover letter
-% Usage: \makelettertitle
-\newcommand*{\makelettertitle}{
-  \vspace{8.4mm}
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{12.5cm} R{4.5cm}}
-    \recipienttitlestyle{\@recipientname} & \letterdatestyle{\@letterdate}
-  \end{tabular*}
-  \begin{singlespace}
-    \recipientaddressstyle{\@recipientaddress} \\\\
-  \end{singlespace}
-  \ifthenelse{\isundefined{\@lettertitle}}
-    {}
-    {\lettertitlestyle{\@lettertitle} \\}
-  \lettertextstyle{\@letteropening} 
-}
-
-% Define a closing of the cover letter
-% Usage: \makeletterclosing
-\newcommand*{\makeletterclosing}{
-  \vspace{3.4mm}
-  \lettertextstyle{\@letterclosing} \\\\
-  \letternamestyle{\@firstname \@lastname}
-  \ifthenelse{\isundefined{\@letterenclosure}}
-    {\\}
-    {
-      \\\\\\
-      \letterenclosurestyle{\@letterenclname:  \@letterenclosure} \\
-    }
 }
